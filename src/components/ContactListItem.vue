@@ -1,18 +1,21 @@
 <template>
-  <div>userview</div>
+  <li>
+    <router-link :to="/user/+contact.id">
+      {{contact.name.display}}
+    </router-link>
+  </li>
 </template>
 
 <script>
 export default {
-  name: "user-view",
+  name: "contact-list-item",
   props: {
-    contacts: Array
+    contact: Object
   },
   data () {
     return {}
   },
-  computed: {
-  },
+  computed: {},
   mounted () {},
   methods: {},
   components: {}
@@ -20,5 +23,4 @@ export default {
 </script>
 
 <style>
-
 </style>

@@ -10,6 +10,28 @@
 </template>
 
 <script>
+  let reverseName = (name) => name.split(" ").reverse()
+
+  function orderByLastName (contacts) {
+    return contacts.sort((a, b) => {
+      let nameA = a.name.display.toUpperCase(); // ignore upper and lowercase
+      let nameB = b.name.display.toUpperCase(); // ignore upper and lowercase
+
+      nameA = reverseName(nameA)
+      nameB = reverseName(nameB)
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0
+    })
+  }
+
   export default {
     name: "main",
     data (){
@@ -23,7 +45,7 @@
     methods: {
       fetchPlayers () {
         this.$http.get("/players.json").then((response) => {
-          this.contacts = response.body.players
+          this.contacts = orderByLastName(response.body.players)
         }, (response) => {
           // TODO: Add helpful message
         })
@@ -35,7 +57,6 @@
 <style>
   body {
     font-family: Helvetica, sans-serif;
-    margin: 0;
   }
   header {
     background: whitesmoke;

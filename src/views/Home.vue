@@ -1,38 +1,19 @@
 <template :contacts="contacts">
   <div>
-    <ol style="width:200px; float:left;">
-      <li v-for="contact in contactsOrderByLastName">
-        {{contact.name.first}} <strong>{{contact.name.last}}</strong>
-      </li>
-    </ol>
+    <contact-list :contacts="contacts"></contact-list>
   </div>
 </template>
 
 <script>
+import ContactList from "../components/ContactList.vue"
+
 export default {
+  name: "home",
+  components: { ContactList },
   props: {
     contacts: Array
   },
-  computed: {
-    contactsOrderByLastName (){
-      return this.contacts.sort((a, b) => {
-        let nameA = a.name.last.toUpperCase(); // ignore upper and lowercase
-        let nameB = b.name.last.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-
-        // names must be equal
-        return 0
-      })
-    }
-  },
-  mounted () {},
-  methods: {},
-  components: {}
+  mounted () {}
 }
 </script>
 
