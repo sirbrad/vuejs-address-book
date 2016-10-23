@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li class="contact-list__heading">
     <h2>{{symbol}}</h2>
   </li>
 </template>
@@ -13,4 +13,9 @@ export default {
 </script>
 
 <style>
+.contact-list__heading {
+  background: #eee;
+  line-height: 1;
+  margin: 0;
+}
 </style>

@@ -1,5 +1,9 @@
 <template>
-  <div>userview</div>
+  <div>
+    <div v-if="user">
+      {{user.name.display}}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -9,16 +13,33 @@ export default {
     contacts: Array
   },
   data () {
-    return {}
+    return {
+      user: null
+    }
+  },
+  created () {
+    this.setCurrentUser()
   },
   computed: {
   },
-  mounted () {},
-  methods: {},
+  watch: {
+    "contacts": "setCurrentUser"
+  },
+  methods: {
+    setCurrentUser () {
+      if (!this.contacts)
+        return false
+
+      this.contacts.map((entry)=> {
+        if (entry.id === parseInt(this.$route.params.id)) {
+          this.user = entry
+        }
+      })
+    }
+  },
   components: {}
 }
 </script>
 
 <style>
-
 </style>

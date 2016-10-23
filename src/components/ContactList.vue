@@ -30,10 +30,15 @@ export default {
     })
 
 
-    return h('ol', rows)
+    return h('ol', {class: "contact-list"}, rows)
   }
 }
 </script>
 
 <style>
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
 </style>

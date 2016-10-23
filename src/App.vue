@@ -4,7 +4,7 @@
       Header
     </header>
     <main>
-      <router-view :contacts="contacts"></router-view>
+      <router-view :contacts.sync="contacts"></router-view>
     </main>
   </div>
 </template>
@@ -48,6 +48,7 @@
           this.contacts = orderByLastName(response.body.players)
         }, (response) => {
           // TODO: Add helpful message
+          console.log('error')
         })
       }
     }
