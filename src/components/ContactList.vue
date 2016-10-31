@@ -28,8 +28,7 @@ export default {
 
       currentSymbol = getSymbol(name[0])
     })
-
-
+    
     return h('ol', {class: "contact-list"}, rows)
   }
 }

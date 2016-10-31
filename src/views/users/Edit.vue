@@ -1,7 +1,21 @@
 <template>
   <div>
     <div v-if="user">
-      {{user.name.display}}
+      <h1>{{user.name.display}}</h1>
+      <dl>
+        <dt>Position:</dt>
+        <dd>{{user.latestPosition}}</dd>
+        <dt>Shirt number:</dt>
+        <dd>{{user.info.shirtNum}}</dd>
+        <dt>Birth:</dt>
+        <dd>
+          {{user.birth.date.label}} in {{user.birth.country.country}}
+        </dd>
+        <dt>Age:</dt>
+        <dd>{{user.age}}</dd>
+        <dt>Dimensions:<dt>
+        <dd>{{user.height}}cm and {{user.weight}}kg</dd>
+      </dl>
     </div>
   </div>
 </template>

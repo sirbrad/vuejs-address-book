@@ -1,15 +1,13 @@
-<template :contacts="contacts">
+<template>
   <div>
-    <contact-list :contacts="contacts"></contact-list>
+    hello
   </div>
 </template>
 
 <script>
-import ContactList from "../components/ContactList.vue"
 
 export default {
   name: "home",
-  components: { ContactList },
   props: {
     contacts: Array
   },

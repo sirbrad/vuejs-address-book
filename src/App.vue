@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-    <header role="banner">
-      Header
-    </header>
-    <main>
-      <router-view :contacts.sync="contacts"></router-view>
-    </main>
+    <section>
+      <section class="sidebar">
+        <contact-list :contacts="contacts"></contact-list>
+      </section>
+      <main class="main">
+        <router-view :contacts.sync="contacts"></router-view>
+      </main>
+    </section>
   </div>
 </template>
 
 <script>
+  import ContactList from "./components/ContactList.vue"
+
   let reverseName = (name) => name.split(" ").reverse()
 
   function orderByLastName (contacts) {
@@ -34,6 +38,7 @@
 
   export default {
     name: "main",
+    components: { ContactList },
     data (){
       return {
         contacts: []
@@ -56,18 +61,24 @@
 </script>
 
 <style>
+  *,*:before,*:after {
+    box-sizing: border-box;
+  }
   body {
     font-family: Helvetica, sans-serif;
+    margin-left: 25%;
   }
-  header {
-    background: whitesmoke;
+  .sidebar {
+    border-right: 1px solid #eee;
     position: fixed;
-    width: 100%;
+    left: 0;
     top: 0;
-    padding: 1em;
+    width: 25%;
+    height: 100%;
+    overflow: scroll;
+    z-index: 1;
   }
-  main {
-    margin-top: 50px;
-    padding: 1em;
+  .main {
+    padding: 20px;
   }
 </style>
