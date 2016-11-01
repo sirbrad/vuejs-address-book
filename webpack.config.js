@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -31,6 +32,16 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      vue: {
+        postcss: [require('autoprefixer')({
+            browsers: ['last 2 versions']
+          })
+        ]
+      }
+    })
+  ],
   devServer: {
     historyApiFallback: true,
     noInfo: true

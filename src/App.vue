@@ -5,7 +5,9 @@
         <contact-list :contacts="contacts"></contact-list>
       </section>
       <main class="main">
-        <router-view :contacts.sync="contacts"></router-view>
+        <transition name="fade">
+          <router-view :key="$route.fullPath" :contacts.sync="contacts"></router-view>
+        </transition>
       </main>
     </section>
   </div>
@@ -77,8 +79,20 @@
     height: 100%;
     overflow: scroll;
     z-index: 1;
+
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
   }
   .main {
     padding: 20px;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1s
+  }
+  .fade-enter, .fade-leave-active {
+    opacity: 0
   }
 </style>
