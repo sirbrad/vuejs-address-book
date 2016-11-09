@@ -1,13 +1,14 @@
 <template>
   <section class="sidebar">
     <search-bar></search-bar>
-    <contact-list :contacts="contacts"></contact-list>
+    <contact-list :contacts="filteredContacts"></contact-list>
   </section>
 </template>
 
 <script>
 import ContactList from "./ContactList.vue"
 import SearchBar from "./SearchBar.vue"
+import { bus } from "../utils"
 
 export default {
   name: "sidebar",
@@ -18,9 +19,32 @@ export default {
   props: {
     contacts: Array
   },
-  computed: {},
-  mounted () {},
-  methods: {}
+  data (){
+    return {
+      filterByTerm: ""
+    }
+  },
+  created (){
+    bus.$on("filter-by-term", term => this.filterByTerm = term)
+  },
+  computed: {
+    filteredTermLowerCase () {
+      return this.filterByTerm.toLowerCase()
+    },
+    filteredContacts () {
+      let contacts = []
+
+      this.contacts.filter((contact) => {
+        name = contact.name.display.toLowerCase()
+
+        if (name.includes(this.filterByTerm)) {
+          contacts.push(contact)
+        }
+      })
+
+      return contacts
+    }
+  }
 }
 </script>
 

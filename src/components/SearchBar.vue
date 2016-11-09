@@ -21,7 +21,7 @@ export default {
   mounted () {},
   methods: {
     searchUpdated() {
-      bus.$emit('filter-by', this.searchTerm)
+      bus.$emit('filter-by-term', this.searchTerm)
     }
   },
   components: {}
