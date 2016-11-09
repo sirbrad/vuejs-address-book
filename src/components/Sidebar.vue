@@ -28,13 +28,16 @@ export default {
     bus.$on("filter-by-term", term => this.filterByTerm = term)
   },
   computed: {
+    filteredTermLowerCase () {
+      return this.filterByTerm.toLowerCase()
+    },
     filteredContacts () {
       let contacts = []
 
       this.contacts.filter((contact) => {
         name = contact.name.display.toLowerCase()
 
-        if (name.includes(this.filterByTerm)) {
+        if (name.includes(this.filteredTermLowerCase)) {
           contacts.push(contact)
         }
       })
