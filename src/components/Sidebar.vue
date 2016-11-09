@@ -28,9 +28,6 @@ export default {
     bus.$on("filter-by-term", term => this.filterByTerm = term)
   },
   computed: {
-    filteredTermLowerCase () {
-      return this.filterByTerm.toLowerCase()
-    },
     filteredContacts () {
       let contacts = []
 
