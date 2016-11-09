@@ -1,3 +1,5 @@
+import Vue from "vue"
+
 export function fetchUser(id, contacts) {
   let contact
 
@@ -9,3 +11,5 @@ export function fetchUser(id, contacts) {
 
   return contact
 }
+
+export const bus = new Vue()

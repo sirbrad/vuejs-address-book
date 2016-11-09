@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <section class="sidebar">
-      <contact-list :contacts="contacts"></contact-list>
-    </section>
+    <sidebar :contacts="contacts"></sidebar>
     <main class="main">
       <transition :name="transitionName" mode="out-in">
         <router-view :key="$route.fullPath" :contacts.sync="contacts"></router-view>
@@ -12,7 +10,7 @@
 </template>
 
 <script>
-  import ContactList from "./components/ContactList.vue"
+  import Sidebar from "./components/Sidebar.vue"
   import { fetchUser } from "./utils"
 
   let reverseName = (name) => name.split(" ").reverse()
@@ -39,11 +37,13 @@
 
   export default {
     name: "main",
-    components: { ContactList },
+    components: {
+      Sidebar
+    },
     data (){
       return {
         contacts: [],
-        transitionName: "fade"
+        transitionName: ""
       }
     },
     beforeMount (){
@@ -93,19 +93,6 @@
   .main > div {
     flex: 1;
     flex-direction: column;
-  }
-
-  .sidebar {
-    flex: 1;
-    border-right: 1px solid #eee;
-    flex: 0 0 12em;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 20%;
-    height: 100%;
-    overflow: scroll;
-    z-index: 1;
   }
 
   .slide-up-enter-active, .slide-up-leave-active,

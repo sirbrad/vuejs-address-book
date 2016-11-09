@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "user-view",
+  name: "user-show",
   props: {
     contacts: Array
   },
