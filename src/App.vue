@@ -1,20 +1,19 @@
 <template>
   <div id="app">
-    <section>
-      <section class="sidebar">
-        <contact-list :contacts="contacts"></contact-list>
-      </section>
-      <main class="main">
-        <transition name="fade">
-          <router-view :key="$route.fullPath" :contacts.sync="contacts"></router-view>
-        </transition>
-      </main>
+    <section class="sidebar">
+      <contact-list :contacts="contacts"></contact-list>
     </section>
+    <main class="main">
+      <transition :name="transitionName" mode="out-in">
+        <router-view :key="$route.fullPath" :contacts.sync="contacts"></router-view>
+      </transition>
+    </main>
   </div>
 </template>
 
 <script>
   import ContactList from "./components/ContactList.vue"
+  import { fetchUser } from "./utils"
 
   let reverseName = (name) => name.split(" ").reverse()
 
@@ -43,11 +42,20 @@
     components: { ContactList },
     data (){
       return {
-        contacts: []
+        contacts: [],
+        transitionName: "fade"
       }
     },
     beforeMount (){
       this.fetchPlayers()
+    },
+    watch: {
+      "$route" (to, from) {
+        let toUser = fetchUser(to.params.id, this.contacts);
+        let fromUser = fetchUser(from.params.id, this.contacts);
+
+        return this.transitionName = (toUser > fromUser) ? "slide-down" : "slide-up";
+      }
     },
     methods: {
       fetchPlayers () {
@@ -68,31 +76,66 @@
   }
   body {
     font-family: Helvetica, sans-serif;
-    margin-left: 25%;
   }
+
+  #app {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+  }
+
+  .main {
+    display: flex;
+    flex: 1;
+    margin-left: 20%;
+  }
+
+  .main > div {
+    flex: 1;
+    flex-direction: column;
+  }
+
   .sidebar {
+    flex: 1;
     border-right: 1px solid #eee;
+    flex: 0 0 12em;
     position: fixed;
     left: 0;
     top: 0;
-    width: 25%;
+    width: 20%;
     height: 100%;
     overflow: scroll;
     z-index: 1;
-
-
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
   }
-  .main {
+
+  .slide-up-enter-active, .slide-up-leave-active,
+  .slide-down-enter-active, .slide-down-leave-active
+   {
+    transition: all .15s;
+  }
+  .slide-up-leave-active,
+  .slide-down-enter {
+    transform: translateY(100%);
+  }
+  .slide-up-enter,
+  .slide-down-leave-active {
+    transform: translateY(-100%);
+  }
+  .card {
+    flex: 1;
+    min-height: 100vh;
     padding: 20px;
   }
-
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity 1s
+  .card-contain {
+    max-width: 400px;
+    margin: 10vh auto 0;
   }
-  .fade-enter, .fade-leave-active {
-    opacity: 0
+  .card--v-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card--v-align > .card-contain {
+    margin: 0;
   }
 </style>

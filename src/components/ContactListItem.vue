@@ -14,11 +14,7 @@ export default {
   },
   data () {
     return {}
-  },
-  computed: {},
-  mounted () {},
-  methods: {},
-  components: {}
+  }
 }
 </script>
 
@@ -27,9 +23,13 @@ export default {
   padding: 10px;
   display: block;
   text-decoration: none;
+  transition: all 0.2s;
 }
 .contact-list__item:hover,
 .contact-list__item:focus {
-  background: black;
+  background: rgba(0, 0, 0, .02);
+}
+.contact-list__item.router-link-active {
+  border-left: 5px solid #FC0405;
 }
 </style>
