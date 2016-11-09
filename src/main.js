@@ -6,7 +6,7 @@ Vue.use(VueResource);
 
 import App from "./App.vue";
 
-const app = new Vue({
+new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
