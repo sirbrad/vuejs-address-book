@@ -1,15 +1,15 @@
-import Vue from "vue"
+import Vue from "vue";
 
 export function fetchUser(id, contacts) {
-  let contact
+  let contact;
 
   contacts.map((entry)=> {
     if (entry.id === parseInt(id)) {
       contact = entry.name.last;
     }
-  })
+  });
 
-  return contact
+  return contact;
 }
 
-export const bus = new Vue()
+export const bus = new Vue();

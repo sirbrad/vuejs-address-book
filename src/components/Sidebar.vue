@@ -32,7 +32,7 @@ export default {
       return this.filterByTerm.toLowerCase()
     },
     filteredContacts () {
-      let contacts = []
+      let contacts = [];
 
       this.contacts.filter((contact) => {
         name = contact.name.display.toLowerCase()
