@@ -76,6 +76,7 @@
   }
   body {
     font-family: Helvetica, sans-serif;
+    margin: 0;
   }
 
   #app {
