@@ -1,7 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
 
-
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -9,49 +8,39 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
-        loader: 'vue!eslint'
+        loader: 'vue-loader',
+        options: {
+          // vue-loader options go here
+        }
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file',
-        query: {
+        loader: 'file-loader',
+        options: {
           name: '[name].[ext]?[hash]'
         }
       }
     ]
   },
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      vue: {
-        postcss: [require('autoprefixer')({
-            browsers: ['last 2 versions']
-          })
-        ]
-      }
-    })
-  ],
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue'
+    }
+  },
   devServer: {
     historyApiFallback: true,
     noInfo: true
   },
-  devtool: '#eval-source-map',
-  resolve: {
-    alias: {
-      vue: 'vue/dist/vue.js'
-    }
-  }
+  devtool: '#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -64,9 +53,13 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
       compress: {
         warnings: false
       }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
     })
   ])
 }
