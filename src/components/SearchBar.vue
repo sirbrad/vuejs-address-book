@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import { bus } from "../utils"
+import { bus } from "../utils";
 
 export default {
   name: "search-bar",
   data () {
     return {
       searchTerm: ""
-    }
+    };
   },
   watch: {
     "searchTerm": "searchUpdated"
@@ -21,11 +21,11 @@ export default {
   mounted () {},
   methods: {
     searchUpdated() {
-      bus.$emit('filter-by-term', this.searchTerm)
+      bus.$emit("filter-by-term", this.searchTerm);
     }
   },
   components: {}
-}
+};
 </script>
 
 <style scoped>

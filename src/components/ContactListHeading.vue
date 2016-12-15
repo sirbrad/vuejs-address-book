@@ -10,7 +10,7 @@ export default {
   props: {
     symbol: String
   }
-}
+};
 </script>
 
 <style>

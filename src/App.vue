@@ -10,18 +10,18 @@
 </template>
 
 <script>
-  import Sidebar from "./components/Sidebar.vue"
-  import { fetchUser } from "./utils"
+  import Sidebar from "./components/Sidebar.vue";
+  import { fetchUser } from "./utils";
 
-  let reverseName = (name) => name.split(" ").reverse()
+  let reverseName = (name) => name.split(" ").reverse();
 
   function orderByLastName (contacts) {
     return contacts.sort((a, b) => {
       let nameA = a.name.display.toUpperCase(); // ignore upper and lowercase
       let nameB = b.name.display.toUpperCase(); // ignore upper and lowercase
 
-      nameA = reverseName(nameA)
-      nameB = reverseName(nameB)
+      nameA = reverseName(nameA);
+      nameB = reverseName(nameB);
 
       if (nameA < nameB) {
         return -1;
@@ -31,8 +31,8 @@
       }
 
       // names must be equal
-      return 0
-    })
+      return 0;
+    });
   }
 
   export default {
@@ -44,10 +44,10 @@
       return {
         contacts: [],
         transitionName: ""
-      }
+      };
     },
     beforeMount (){
-      this.fetchPlayers()
+      this.fetchPlayers();
     },
     watch: {
       "$route" (to, from) {
@@ -60,14 +60,13 @@
     methods: {
       fetchPlayers () {
         this.$http.get("/players.json").then((response) => {
-          this.contacts = orderByLastName(response.body.players)
-        }, (response) => {
+          this.contacts = orderByLastName(response.body.players);
+        }, () => {
           // TODO: Add helpful message
-          console.log('error')
-        })
+        });
       }
     }
-  }
+  };
 </script>
 
 <style>

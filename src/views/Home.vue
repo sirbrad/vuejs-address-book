@@ -14,7 +14,7 @@ export default {
     contacts: Array
   },
   mounted () {}
-}
+};
 </script>
 
 <style scoped>

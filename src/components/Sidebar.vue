@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import ContactList from "./ContactList.vue"
-import SearchBar from "./SearchBar.vue"
-import { bus } from "../utils"
+import ContactList from "./ContactList.vue";
+import SearchBar from "./SearchBar.vue";
+import { bus } from "../utils";
 
 export default {
   name: "sidebar",
@@ -22,30 +22,31 @@ export default {
   data (){
     return {
       filterByTerm: ""
-    }
+    };
   },
   created (){
-    bus.$on("filter-by-term", term => this.filterByTerm = term)
+    bus.$on("filter-by-term", term => this.filterByTerm = term);
   },
   computed: {
     filteredTermLowerCase () {
-      return this.filterByTerm.toLowerCase()
+      return this.filterByTerm.toLowerCase();
     },
     filteredContacts () {
       let contacts = [];
+      let name;
 
       this.contacts.filter((contact) => {
-        name = contact.name.display.toLowerCase()
+        name = contact.name.display.toLowerCase();
 
         if (name.includes(this.filteredTermLowerCase)) {
-          contacts.push(contact)
+          contacts.push(contact);
         }
-      })
+      });
 
-      return contacts
+      return contacts;
     }
   }
-}
+};
 </script>
 
 <style>

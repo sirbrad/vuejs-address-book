@@ -11,11 +11,8 @@ export default {
   name: "contact-list-item",
   props: {
     contact: Object
-  },
-  data () {
-    return {}
   }
-}
+};
 </script>
 
 <style>

@@ -31,12 +31,10 @@ export default {
   data () {
     return {
       user: null
-    }
+    };
   },
   created () {
-    this.setCurrentUser()
-  },
-  computed: {
+    this.setCurrentUser();
   },
   watch: {
     "contacts": "setCurrentUser",
@@ -45,17 +43,17 @@ export default {
   methods: {
     setCurrentUser () {
       if (!this.contacts)
-        return false
+        return false;
 
       this.contacts.map((entry)=> {
         if (entry.id === parseInt(this.$route.params.id)) {
-          this.user = entry
+          this.user = entry;
         }
-      })
+      });
     }
   },
   components: {}
-}
+};
 </script>
 
 <style>

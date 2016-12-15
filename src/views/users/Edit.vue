@@ -32,7 +32,7 @@ export default {
     }
   },
   created () {
-    this.setCurrentUser()
+    this.setCurrentUser();
   },
   computed: {
   },
@@ -42,11 +42,11 @@ export default {
   methods: {
     setCurrentUser () {
       if (!this.contacts)
-        return false
+        return false;
 
       this.contacts.map((entry)=> {
         if (entry.id === parseInt(this.$route.params.id)) {
-          this.user = entry
+          this.user = entry;
         }
       })
     }
